@@ -1,0 +1,39 @@
+body {
+    background-image: url("../images/bg1.jpg");
+    font-size: 16px;
+}
+.row {
+    max-width: 600px;
+    margin: auto;
+}
+.qBox {
+    display: block;
+    background-color: #ffffff;
+    border: 1px solid black;
+    font-weight: bolder;
+    font-size: 25px;
+    border-radius: 10px;
+    opacity: 0.7;
+    /* margin-top: 80px; */
+    /* height: 100px; */
+    text-align: center;
+}
+.btn {
+font-weight: bolder;
+color: red;
+margin: 20px auto;
+border: 1px solid black;
+}
+.timer {
+    background-color: orange;
+    color: white;
+    font-weight: bolder;
+    font-size: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 80px;
+    /* height: 50px; */
+}
+.option:hover {
+    opacity: 0.7;
+}
