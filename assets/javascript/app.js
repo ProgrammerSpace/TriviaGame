@@ -1,6 +1,6 @@
 var questionTracker = -1, totalQuestions, timeLeft = 16;
 var ansOptions = [], questions = [];
-var unanswered, correctAnswers, wrongAnswers;
+var unanswered = 0, correctAnswers = 0, wrongAnswers = 0;
 
 function frameQuestions(ques, ansCh, correct) {
     console.log("ques: " + ques + "ans: " + ansCh + "correct: " + correct);
@@ -68,8 +68,10 @@ function startTimer() {
         timeLeft--;
     } else {
         clearInterval(timer);
-        console.log("timer works!");
         if (totalQuestions - (questionTracker + 1)) {
+            console.log("Missed:(");
+            unanswered++;
+            $(".unAns").text(unanswered + "/10");
             nextQuestion();
         } else {
             endGame();
@@ -80,17 +82,65 @@ function startTimer() {
 
 function endGame() {
     console.log("Game Over!!");
+    $("#question").hide();
+    $(".choice").hide();
+    $(".timer").hide();
+
+    $(".initHead").html("Thanks for taking the quiz!!");
+
+    var thanks = $("<img>");
+    $(thanks).attr("src", "assets/images/thankyou.gif");
+    $(thanks).attr("width", "250");
+    $(thanks).attr("height", "250");
+    // $(".initHead").html("<h1>Thanks for taking the quiz!!</h1><img src=\"assets/images/thankyou.gif\" width=\"250\" height=\"250\">");
+    var reset = $("<button>")
+    $(reset).text("Try Again!");
+    $(reset).addClass("btn btn-warning btn-lg");
+    $(reset).attr("id", "reset");
+    $(".initHead").append(thanks).append(reset);
+    $(".initHead").show();
+
+}
+
+function reset() {
+
+    $("#reset").remove();
+    $(".initHead").html("Ready to check your Math skills???");
+    $("#start").show();
+
+    $(".correctAns").text("0");
+    $(".wrongAns").text("0");
+    $(".unAns").text("0");
+
+    $("#question").empty().show();
+    $(".choice").empty().show();
+    $(".timer").empty().show();
 }
 
 $(document).ready(function () {
-    $("#start").click(function () {
+    // $("#start").click(function () {
+    $(".qBox").on('click', '#start', function () {
+        $(".initHead").hide();
         $("#start").hide();
         fetchQuestions();
-        // setTimeout(nextQuestion, 1000);
+
+
+        /* Wait time varies with different APIs and different number of questions in set
+        Adding function call into .then
+ 
+        setTimeout(nextQuestion, 1000); */
+
     });
+
+    $(".qBox").on('click', '#reset', function () {
+        reset();
+    });
+
     $(".choice").on('click', '.btn', function () {
         if ($(this).text() == questions[questionTracker].c) {
             console.log("correct!");
+            correctAnswers++;
+            $(".correctAns").text(correctAnswers + "/10");
             if (totalQuestions - (questionTracker + 1)) {
                 clearInterval(timer);
                 nextQuestion();
@@ -100,6 +150,8 @@ $(document).ready(function () {
             }
         } else {
             console.log("wrong:(");
+            wrongAnswers++;
+            $(".wrongAns").text(wrongAnswers + "/10");
             if (totalQuestions - (questionTracker + 1)) {
                 clearInterval(timer);
                 nextQuestion();

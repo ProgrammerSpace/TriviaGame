@@ -18,6 +18,15 @@ body {
     /* height: 100px; */
     text-align: center;
 }
+.score {
+    display: block;
+    background-color: grey;
+    color: white;
+    font-weight: bolder;
+    opacity: 0.85;
+    border: 1px solid black;
+    border-radius: 5px;
+}
 .btn {
 font-weight: bolder;
 color: red;
@@ -25,14 +34,10 @@ margin: 20px auto;
 border: 1px solid black;
 }
 .timer {
-    /* background-color: orange; */
-    color: brown;
+    color: red;
     font-weight: bolder;
-    font-size: 20px;
-    border-radius: 10px;
-    text-align: center;
+    font-size: 35px;
     margin-top: 80px;
-    /* height: 50px; */
 }
 .option:hover {
     opacity: 0.7;
