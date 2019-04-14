@@ -21,7 +21,7 @@ function fetchQuestions() {
         for (let i = 0; i < response.results.length; i++) {
             let ques = response.results[i].question;
             ansCh = response.results[i].incorrect_answers;
-            correct = response.results[i].correct_answer
+            correct = response.results[i].correct_answer;
             questions[i] = new frameQuestions(ques, ansCh, correct);
         }
         nextQuestion();
@@ -87,6 +87,7 @@ function evaluateAnswer(status) {
 
         // If user answer is wrong
     } else if (status == "wrong") {
+
         $(gif).attr("src", "assets/images/notthat.gif");
         $(".choice").html("<p> Correct answer is " + questions[questionTracker].c);
         wrongAnswers++;
@@ -95,7 +96,7 @@ function evaluateAnswer(status) {
         // If user missed to answer on right time
     } else if (status == "missed") {
         $(gif).attr("src", "assets/images/ohnoo.gif");
-        $(".choice").html("<p>Time's up!!</p><p>Correct answer is " + questions[questionTracker].c + "</p>");
+        $(".choice").html("<p >Time's up!!</p><p>Correct answer is " + questions[questionTracker].c + "</p>");
         unanswered++;
         $(".unAns").text(unanswered + "/" + totalQuestions);
     }
@@ -179,13 +180,15 @@ $(document).ready(function () {
                 setTimeout(endGame, 3000);
             }
         } else {
+
             evaluateAnswer("wrong");
             if (totalQuestions - (questionTracker + 1)) {
+
                 clearInterval(timer);
                 setTimeout(nextQuestion, 3000);
             } else {
+                clearInterval(timer);
                 setTimeout(endGame, 3000);
-                endGame();
             }
         }
     });
